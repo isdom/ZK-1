@@ -110,7 +110,11 @@ public class SimpleExtXYModel extends AbstractChartModel implements ExtXYModel {
 		this.shift = shift;
 	}
 
-	private Map prepareEventData (Comparable series, Number x, Number y, Map data, int index) {
+    private Map<?,?> prepareEventData (Comparable<?> series, Number x, Number y, Map data, int index) {
+        return prepareEventData(series, x, y, data, index, null);
+    }
+    
+	private Map<?,?> prepareEventData (Comparable<?> series, Number x, Number y, Map data, int index, final Boolean shift) {
 		Map map = new HashMap();
 		map.put("index", index);
 		if (x != null)
@@ -119,6 +123,9 @@ public class SimpleExtXYModel extends AbstractChartModel implements ExtXYModel {
 			map.put("y", y);
 		if (data != null)
 			map.put("data", data);
+		if (null != shift) {
+            map.put("shift", shift);
+		}
 		return map;
 	}
 	
@@ -240,6 +247,13 @@ public class SimpleExtXYModel extends AbstractChartModel implements ExtXYModel {
 				prepareEventData(series, x, y, null, -1));
 	}
 	
+	// add by isdom 2016-09-27
+    public void addValue(final Comparable<?> series, final Number x, final Number y, final boolean shift) {
+        addValue(series, x, y, -1);
+        fireEvent(ChartDataEvent.ADDED, series,  
+                prepareEventData(series, x, y, null, -1, shift));
+    }
+    
 	public void addValue(Comparable series, Number x, Number y, int index) {
 		addValue0(series, x, y, null, index);
 		if (index >= 0)

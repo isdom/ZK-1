@@ -344,7 +344,11 @@ zhighcharts.ZHighCharts = zk.$extends(zul.wgt.Div, {
 			for (i = 0;i < this.chart.series.length; i++) {
 				var tseries = this.chart.series[i];
 				if (tseries.name == series) {
-					tseries.addPoint(dataObj, true);
+				    if (dataObj.shift != undefined) {
+                       tseries.addPoint(dataObj, true, dataObj.shift);
+				    } else {
+					   tseries.addPoint(dataObj, true);
+					}
 					break;
 				}
 			}

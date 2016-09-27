@@ -213,9 +213,8 @@ public class ZHighCharts extends Div implements EventListener {
 			}
 		}
 	}	
-	private void addPoint(Comparable series, String data){
-		response(null, new AuInvoke(this, "addPoint", 
-				new Object[] {series, data}));
+	private void addPoint(Comparable<?> series, String data){
+		response(null, new AuInvoke(this, "addPoint", series, data));
 	}
 	private void addPoints(String data, boolean shift){
 		response(null, new AuInvoke(this, "addPoints", data, shift));
