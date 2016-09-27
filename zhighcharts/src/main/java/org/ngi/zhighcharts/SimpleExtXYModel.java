@@ -249,7 +249,10 @@ public class SimpleExtXYModel extends AbstractChartModel implements ExtXYModel {
 	
 	// add by isdom 2016-09-27
     public void addValue(final Comparable<?> series, final Number x, final Number y, final boolean shift) {
-        addValue(series, x, y, -1);
+        addValue0(series, x, y, null, -1);
+        if (shift) {
+            removeValue0(series, 0);
+        }
         fireEvent(ChartDataEvent.ADDED, series,  
                 prepareEventData(series, x, y, null, -1, shift));
     }
