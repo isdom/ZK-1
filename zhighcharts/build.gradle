@@ -1,4 +1,4 @@
-apply from: 'http://git.medtap.cn/jocean/devconf/raw/master/devconf/build-lib.gradle'
+apply from: 'http://git.jocean.org/jocean/devconf/raw/master/devconf/build-lib.gradle'
 
 configurations {
     all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
@@ -10,7 +10,7 @@ configurations {
 
 dependencies {
     /* log */
-    compile 'org.slf4j:slf4j-api:1.7.7'
+    compile 'org.slf4j:slf4j-api:1.7.25'
     
     /* zkoss */
     compile "org.zkoss.zk:zkplus:${zkossVersion}"
